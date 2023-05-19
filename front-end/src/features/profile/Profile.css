@@ -1,0 +1,142 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.profile-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-upload .ant-upload-list-item-container {
+  width: 200px !important;
+  height: 200px !important;
+}
+
+.custom-upload .ant-upload .ant-upload-select {
+  width: 200px !important;
+  height: 200px !important;
+}
+
+.submit-button {
+  background-color: #637394 !important;
+}
+
+.save-button {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  margin-right: 20px;
+}
+
+/* Profile Card */
+
+@keyframes open {
+  0% {
+    background-position: 166% -25%, 220% -69%;
+  }
+  100% {
+    background-position: 120% -5%, 200% -40%;
+  }
+}
+
+.field {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+input[type="file"] {
+  display: none;
+}
+
+.image-input {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 199px;
+  height: 197px;
+}
+
+.custom-file-upload {
+  border-radius: 80%;
+  display: inline-block;
+  position: relative;
+  /* padding: 6px; */
+  cursor: pointer;
+  /* background: linear-gradient(270deg, #3fa1a9, #79f1a4); */
+  /* overflow: auto; */
+  /* background: linear-gradient(
+    315deg,
+    rgba(101, 0, 94, 1) 3%,
+    rgba(60, 132, 206, 1) 38%,
+    rgba(48, 238, 226, 1) 68%,
+    rgba(255, 25, 25, 1) 98%
+  ); */
+  border: 3px solid black;
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-upload {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.img-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.img-upload:before {
+  content: "\f093";
+  font-family: "Font Awesome 5 Free";
+  font-size: 40px;
+  font-weight: 900;
+  position: absolute;
+  /* padding-top: 0px; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #63d3a6;
+  border-radius: 50%;
+  opacity: 0;
+  transition: 0.1ms ease;
+}
+.custom-file-upload:hover img {
+  display: none;
+}
+.img-upload:hover:before {
+  opacity: 1;
+}
+
+.edit {
+  color: #fff;
+  width: 180px;
+}
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
