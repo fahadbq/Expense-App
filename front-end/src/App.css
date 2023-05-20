@@ -39,20 +39,17 @@
   }
 }
 
-/* #components-layout-demo-custom-trigger .trigger {
-  padding: 0 24px;
-  font-size: 18px;
-  line-height: 64px;
-  cursor: pointer;
-  transition: color 0.3s;
+/* Styles for screens up to 600px wide */
+@media (max-width: 600px) {
+  /* CSS rules specific to smaller screens */
 }
 
-#components-layout-demo-custom-trigger .trigger:hover {
-  color: #1890ff;
+/* Styles for screens between 601px and 1200px wide */
+@media (min-width: 601px) and (max-width: 1200px) {
+  /* CSS rules specific to medium-sized screens */
 }
 
-#components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
-} */
+/* Styles for screens larger than 1200px wide */
+@media (min-width: 1201px) {
+  /* CSS rules specific to larger screens */
+}
