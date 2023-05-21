@@ -1,4 +1,4 @@
-## Live Demo [Click HERE](https://expensemanagement-web.netlify.app/).
+## Hosted Link: [Click HERE](https://expensemanagement-web.netlify.app/).
 
 <h1>POS Billing Application
 </h1>
