@@ -74,7 +74,7 @@ usersCtlr.account = (req, res) => {
 
 usersCtlr.updateProfile = (req, res) => {
   const userId = req.user._id;
-  const body = { ...req.body, picture: req.file.path };
+  const body = { ...req.body, picture: req?.file?.path };
 
   User.findOneAndUpdate({ _id: userId }, { profile: body }, { new: true })
     .then((user) => {
