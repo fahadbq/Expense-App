@@ -4,7 +4,6 @@ import {
   useTable,
   usePagination,
   useGlobalFilter,
-  useAsyncDebounce,
 } from "react-table";
 import "./Expense.css";
 import {
@@ -102,9 +101,9 @@ const ExpenseList = ({ expensesData }: ExpenseProps) => {
 
   //Search Input
   const [value, setValue] = useState(globalFilter);
-  const onChange = useAsyncDebounce((value) => {
+  const onChange = (value: any) => {
     setGlobalFilter(value || undefined);
-  }, 200);
+  };
 
   return (
     <div className="table-container">

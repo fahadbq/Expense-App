@@ -80,7 +80,6 @@ const ExpenseForm = ({
                   placeholder="$"
                   style={{ width: "100px" }}
                   min={0}
-                  max={1000}
                   onChange={(value) => {
                     setFieldValue("amount", value);
                   }}
