@@ -93,7 +93,7 @@ usersCtlr.googleAuthentication = (req, res) => {
   const reqData = req.sessionStore;
   console.log("readableState", reqData);
 
-  const user = reqData.user;
+  const user = reqData?.user;
 
   console.log("success in authentication", user);
 

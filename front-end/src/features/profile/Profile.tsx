@@ -129,7 +129,7 @@ const Profile = ({}) => {
                     name="phone"
                     label="Phone"
                     placeholder="Enter Your Phone"
-                    style={{ width: "120px", display: "inline-block" }}
+                    style={{ width: "150px", display: "inline-block" }}
                     onChange={(e: any) => {
                       const value = e.target.value;
                       if (value.length <= 10) {

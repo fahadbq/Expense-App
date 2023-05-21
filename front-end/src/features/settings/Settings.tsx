@@ -97,13 +97,12 @@ const Settings = () => {
               .required("Required*")
               .min(0, "Min value is required"),
           })}
-          onSubmit={async (e) => {
+          onSubmit={async (e, { resetForm }) => {
             if (budgetData.length === 0) {
               const formData = { ...e, userId: userData._id };
 
               try {
                 const result = await dispatch(createBudget(formData)).unwrap();
-
                 dispatch(getBudget());
               } catch (err) {}
 
@@ -116,7 +115,6 @@ const Settings = () => {
 
               try {
                 const result = await dispatch(updateBudget(formData)).unwrap();
-
                 dispatch(getBudget());
               } catch (err) {}
             }
@@ -160,14 +158,14 @@ const Settings = () => {
           validationSchema={object({
             name: string().required("Required*"),
           })}
-          onSubmit={async (e) => {
+          onSubmit={async (e, { resetForm }) => {
             console.log("e", e);
 
             const formData = { ...e, userId: userData._id };
 
             try {
               const result = await dispatch(createCategory(formData)).unwrap();
-
+              resetForm();
               dispatch(getCategories());
               // toggleModalExpense();
             } catch (err) {

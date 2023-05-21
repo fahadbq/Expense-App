@@ -8,6 +8,7 @@ const authenticateUser = (req, res, next) => {
     const decodeToken = jwt.verify(token, "expense-app");
     User.findById(decodeToken._id)
       .then((user) => {
+        console.log("user in middleware", user);
         const data = {
           _id: user._id,
           email: user.email,

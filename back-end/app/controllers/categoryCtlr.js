@@ -15,8 +15,6 @@ categoryCtlr.list = (req, res) => {
 categoryCtlr.create = (req, res) => {
   const body = req.body;
 
-  console.log("req", req);
-
   const category = new Category(body);
 
   category
