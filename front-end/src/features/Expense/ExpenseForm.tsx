@@ -43,12 +43,6 @@ const ExpenseForm = ({
     }
   );
 
-  // useEffect(() => {
-  //   dispatch(getCategories());
-  // }, [dispatch]);
-
-  console.log("initialValues", initialValues);
-
   return (
     <div>
       <>
