@@ -90,30 +90,17 @@ usersCtlr.updateProfile = (req, res) => {
 };
 
 usersCtlr.googleAuthentication = (req, res) => {
-  const reqData = req.sessionStore;
-  console.log("readableState", reqData);
-
-  const user = reqData?.user;
-
-  console.log("success in authentication", user);
+  // Access the authenticated user's information
+  const user = req.user;
 
   // Assuming you have a secret key for signing the token
-  const secretKey = process.env.GOOGLE_CLIENT_SECRET;
-
-  // Extract the necessary information from the user object
-  const { id, displayName, email, photos } = user;
-
-  console.log("id", id);
-  console.log("displayName", displayName);
-  console.log("email", email);
-  console.log("photos", photos);
-  console.log("user", user.raw);
+  const secretKey = "YOUR_SECRET_KEY";
 
   // Create the payload for the token
   const payload = {
-    userId: id,
-    displayName,
-    email,
+    userId: user.id,
+    displayName: user.displayName,
+    email: user.email,
   };
 
   // Set the options for the token (e.g., expiration time)
@@ -124,8 +111,9 @@ usersCtlr.googleAuthentication = (req, res) => {
   // Generate the token
   const token = jwt.sign(payload, secretKey, options);
 
+  // Return the token as an API response
   res.json({
-    Authorization: `Bearer ${token}`,
+    token: `Bearer ${token}`,
   });
 };
 

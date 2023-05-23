@@ -18,12 +18,6 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const fileName = Date.now() + "-" + file.originalname;
 
-    // const filePath = path.join(__dirname, "uploads", fileName);
-
-    // // Replace local file system path with API base URL
-    // const apiUrl = "http://localhost:3040";
-    // const fileUrl = filePath.replace(__dirname, apiUrl);
-
     cb(null, fileName);
   },
 });
