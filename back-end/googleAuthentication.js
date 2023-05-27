@@ -10,9 +10,9 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
-    function (request, accessToken, refreshToken, profile, done) {
+    function (request, accessToken, refreshToken, profile, cd) {
       console.log("profile");
-      done(null, profile);
+      cd(null, profile);
       // Use the access token to fetch the user's information from Google's API
 
       console.log("accessToken", accessToken);
