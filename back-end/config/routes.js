@@ -42,12 +42,24 @@ router.patch(
 //Google Authentication
 router.get(
   "/auth/google",
+  (req, res, next) => {
+    req.session.redirectUrl = req.headers.referer; // Store the previous URL in session
+    next();
+  },
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 //Google Authentication Success
 router.get(
   "/auth/google/callback",
+  // Adding user behaviour after redirecting the user to its login page. If user doesn't wanna login through google
+  (req, res, next) => {
+    const redirectUrl = req.session.redirectUrl || "/";
+    delete req.session.redirectUrl; // Remove the stored URL from session
+    req.session.save(() => {
+      next(null, redirectUrl);
+    });
+  },
   passport.authenticate("google", {
     successRedirect: process.env.CLIENT_URL,
     failureRedirect: "/login/failed",
@@ -55,31 +67,35 @@ router.get(
   usersCtlr.googleAuthentication
 );
 
-router.get(
-  "/login/success",
-  // controller
-  (req, res) => {
-    if (req.user) {
-      res.status(200).json({
-        user: req.user,
-      });
-    } else {
-      res.status(403).json({ error: true, message: "Not Authorized" });
-    }
-  }
-);
+// Google Login Success ahahah
+// router.get(
+//   "/login/success",
+//   // controller
+//   (req, res) => {
+//     if (req.user) {
+//       res.status(200).json({
+//         message: "Successfully Logged In",
+//         user: req.user,
+//       });
+//     } else {
+//       res.status(403).json({ error: true, message: "Not Authorized" });
+//     }
+//   }
+// );
 
-router.get("/login/failed", (req, res) => {
-  res.status(401).json({
-    error: true,
-    message: "Login in failure",
-  });
-});
+// Google Login failed
+// router.get("/login/failed", (req, res) => {
+//   res.status(401).json({
+//     error: true,
+//     message: "Login in failure",
+//   });
+// });
 
-router.get("/logout", (req, res) => {
-  req.logout();
-  req.redirect(process.env.CLIENT_URL);
-});
+// // Google Log Out
+// router.get("/logout", (req, res) => {
+//   req.logout();
+//   req.redirect(process.env.CLIENT_URL);
+// });
 
 //Categories
 router.get(`/api/categories`, authenticateUser, categoryCtlr.list);

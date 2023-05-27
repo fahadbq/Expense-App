@@ -94,7 +94,7 @@ usersCtlr.googleAuthentication = (req, res) => {
   const user = req.user;
 
   // Assuming you have a secret key for signing the token
-  const secretKey = "YOUR_SECRET_KEY";
+  const secretKey = "expense-app";
 
   // Create the payload for the token
   const payload = {
@@ -113,7 +113,7 @@ usersCtlr.googleAuthentication = (req, res) => {
 
   // Return the token as an API response
   res.json({
-    token: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
   });
 };
 
