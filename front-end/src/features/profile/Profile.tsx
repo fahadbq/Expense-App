@@ -43,6 +43,7 @@ const Profile = ({}) => {
     occupation,
     phone,
     picture,
+    byteArray,
   }: any) => {
     const formData = {
       data: {
@@ -60,6 +61,8 @@ const Profile = ({}) => {
       const result = await dispatch(updateUserProfile(formData)).unwrap();
 
       dispatch(getUser());
+
+      localStorage.setItem("imageInLocal", byteArray);
       // toggleModalExpense();
     } catch (err) {
       // err toast

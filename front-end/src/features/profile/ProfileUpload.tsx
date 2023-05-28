@@ -1,5 +1,5 @@
 import { useFormikContext } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../app/store/hooks";
 
 const ImgUpload = ({ onChange, src }: any) => (
@@ -17,14 +17,23 @@ const ProfileUpload = () => {
   const { userData } = useAppSelector((state) => state.authentication);
 
   // const baseURL = import.meta.env.VITE_API_BASE_URL;
-  const imageUrl = userData.profile?.picture?.replace("\\", "/");
+  // const imageUrl = userData.profile?.picture?.replace("\\", "/");
 
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<
-    string | ArrayBuffer | null
-  >(
-    imageUrl ||
-      "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
-  );
+  const [imagePreviewUrl, setImagePreviewUrl] =
+    useState<string | ArrayBuffer | null>("");
+
+  useEffect(() => {
+    const storedImage = localStorage.getItem("imageInLocal");
+
+    if (storedImage) {
+      console.log("JSON.parse(storedImage)", storedImage);
+      setImagePreviewUrl(storedImage);
+    } else {
+      setImagePreviewUrl(
+        "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
+      );
+    }
+  }, [localStorage.getItem("imageInLocal")]);
 
   const getBase64 = (fileReader: any): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -43,6 +52,7 @@ const ProfileUpload = () => {
     console.log("file", file);
     const reader = await getBase64(file);
     setImagePreviewUrl(reader);
+    setFieldValue("byteArray", reader);
     setFieldValue("picture", file);
   };
 
