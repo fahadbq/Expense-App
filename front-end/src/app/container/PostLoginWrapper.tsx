@@ -43,6 +43,7 @@ const PostLoginWrapper: React.FC = () => {
           to="#"
           onClick={() => {
             localStorage.removeItem("token");
+            localStorage.removeItem("imageInLocal");
             navigate("/");
           }}
         >

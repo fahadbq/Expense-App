@@ -1,7 +1,6 @@
 import { useFormikContext } from "formik";
 import { useState } from "react";
 import { useAppSelector } from "../../app/store/hooks";
-import usersolid from "../../assets/images/user-solid.svg";
 
 const ImgUpload = ({ onChange, src }: any) => (
   <div className="custom-file-upload img-wrap img-upload">
@@ -17,22 +16,14 @@ const ProfileUpload = () => {
 
   const { userData } = useAppSelector((state) => state.authentication);
 
-  const baseURL = import.meta.env.VITE_API_BASE_URL;
-  const imagePath = userData.profile?.picture?.replace("\\", "/");
-
-  const imageUrl = `${baseURL}/${imagePath}`;
+  // const baseURL = import.meta.env.VITE_API_BASE_URL;
+  const imageUrl = userData.profile?.picture?.replace("\\", "/");
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
   >(
     imageUrl ||
       "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
-  );
-  //   const [active, setActive] = useState("edit");
-
-  console.log(
-    "userData.profile?.picture",
-    userData.profile?.picture?.replace("\\", "/")
   );
 
   const getBase64 = (fileReader: any): Promise<string> =>
