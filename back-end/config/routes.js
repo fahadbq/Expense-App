@@ -8,6 +8,7 @@ const checkCategory = require("../app/middleware/checkCategory");
 const encryptedPassword = require("../app/middleware/encryptPassword");
 const router = express.Router();
 const passport = require("passport");
+const isLoggedIn = require("../app/middleware/isLoggedIn");
 
 const multer = require("multer");
 
@@ -61,41 +62,25 @@ router.get(
     });
   },
   passport.authenticate("google", {
-    successRedirect: process.env.CLIENT_URL,
-    failureRedirect: "/login/failed",
+    // successRedirect: "/auth/success",
+    failureRedirect: "/auth/failed",
   }),
   usersCtlr.googleAuthentication
 );
 
-// Google Login Success ahahah
-// router.get(
-//   "/login/success",
-//   // controller
-//   (req, res) => {
-//     if (req.user) {
-//       res.status(200).json({
-//         message: "Successfully Logged In",
-//         user: req.user,
-//       });
-//     } else {
-//       res.status(403).json({ error: true, message: "Not Authorized" });
-//     }
-//   }
-// );
-
 // Google Login failed
-// router.get("/login/failed", (req, res) => {
-//   res.status(401).json({
-//     error: true,
-//     message: "Login in failure",
-//   });
-// });
+router.get("/auth/failed", (req, res) => {
+  res.status(401).json({
+    error: true,
+    message: "Login in failure",
+  });
+});
 
-// // Google Log Out
-// router.get("/logout", (req, res) => {
-//   req.logout();
-//   req.redirect(process.env.CLIENT_URL);
-// });
+router.get("/auth/logout", (req, res) => {
+  req.session = null;
+  req.logout();
+  req.redirect(process.env.CLIENT_URL);
+});
 
 //Categories
 router.get(`/api/categories`, authenticateUser, categoryCtlr.list);

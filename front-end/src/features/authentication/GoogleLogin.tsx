@@ -1,6 +1,5 @@
 import { redirect, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/store/hooks";
-import { getGoogleLogin } from "./authenticationSlice";
 
 const GoogleLoginButton = () => {
   const dispatch = useAppDispatch();
@@ -12,17 +11,6 @@ const GoogleLoginButton = () => {
       `${import.meta.env.VITE_GOOGLEAPI_BASE_URL}/auth/google`,
       `_self`
     );
-
-    // // redirect(`${import.meta.env.VITE_GOOGLE_BASE_URL}/auth/google`);
-    // try {
-    //   const response = await dispatch(getGoogleLogin()).unwrap();
-    //   // resetForm();
-    //   // localStorage.setItem("token", response.Authorization);
-    //   // navigate("/settings");
-    // } catch (e) {
-    //   // setToastMessage(true);
-    //   console.log("err", e);
-    // }
   };
 
   return (

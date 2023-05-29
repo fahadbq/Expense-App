@@ -11,7 +11,6 @@ import SizeContext from "antd/es/config-provider/SizeContext";
 import { Avatar } from "antd";
 import type { MenuProps } from "antd";
 import { Button, Dropdown } from "antd";
-import coolBackground from "../../assets/images/cool-background.png";
 
 const PostLoginWrapper: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +20,22 @@ const PostLoginWrapper: React.FC = () => {
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
+
+  // const googleLogout = () => {
+  //   console.log("formData", formData);
+
+  //   toggleToast();
+
+  //   try {
+  //     const response = await dispatch(loginUser(formData)).unwrap();
+  //     resetForm();
+  //     localStorage.setItem("token", response.Authorization);
+  //     navigate("/settings");
+  //   } catch (e) {
+  //     setToastMessage(true);
+  //     console.log("err", e);
+  //   }
+  // };
 
   const items: MenuProps["items"] = [
     {
@@ -42,6 +57,7 @@ const PostLoginWrapper: React.FC = () => {
         <Link
           to="#"
           onClick={() => {
+            // googleLogout();
             localStorage.removeItem("token");
             localStorage.removeItem("imageInLocal");
             navigate("/");

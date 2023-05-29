@@ -89,32 +89,92 @@ usersCtlr.updateProfile = (req, res) => {
     });
 };
 
-usersCtlr.googleAuthentication = (req, res) => {
+usersCtlr.googleAuthentication = async (req, res) => {
   // Access the authenticated user's information
-  const user = req.user;
+  const user = req.user._json;
 
   // Assuming you have a secret key for signing the token
   const secretKey = "expense-app";
 
-  // Create the payload for the token
-  const payload = {
-    userId: user.id,
-    displayName: user.displayName,
-    email: user.email,
-  };
+  try {
+    // Check if the user already exists in the database
+    let existingUser = await User.findOne({ email: user.email });
 
-  // Set the options for the token (e.g., expiration time)
-  const options = {
-    expiresIn: "2d",
-  };
+    // If the user doesn't exist, create a new user document
+    if (!existingUser) {
+      const newUser = new User({
+        googleId: req.user.id,
+        username: user.name,
+        email: user.email,
+        password: "GoogleSignIn",
+        profile: {
+          name: user.name,
+          picture: user.picture,
+        },
+      });
 
-  // Generate the token
-  const token = jwt.sign(payload, secretKey, options);
+      existingUser = await newUser.save();
+    }
 
-  // Return the token as an API response
-  res.json({
-    Authorization: `Bearer ${token}`,
-  });
+    // Create the payload for the token
+    const payload = {
+      userId: existingUser._id,
+      username: existingUser.profile.name,
+      email: existingUser.email,
+      profile: existingUser.profile,
+      googleId: existingUser.googleId,
+    };
+
+    // Set the options for the token (e.g., expiration time)
+    const options = {
+      expiresIn: "2d",
+    };
+
+    // Generate the token
+    const token = jwt.sign(payload, secretKey, options);
+
+    // Return the token as an API response
+
+    res.redirect(`${process.env.CLIENT_URL}?token=${token}`);
+  } catch (error) {
+    // Handle any errors that occur during the process
+    console.error("Error during Google authentication:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 };
+
+// usersCtlr.googleAuthentication = (req, res) => {
+//   // Access the authenticated user's information
+//   const user = req.user;
+
+//   // Assuming you have a secret key for signing the token
+//   const secretKey = "expense-app";
+
+//   console.log("user after login", user);
+
+//   // Create the payload for the token
+//   const payload = {
+//     userId: user.id,
+//     username: user.displayName,
+//     email: user.email?.[0].value,
+//     profile: {
+//       name: user.displayName,
+//       picture: user.photos?.[0].value,
+//     },
+//   };
+
+//   // Set the options for the token (e.g., expiration time)
+//   const options = {
+//     expiresIn: "2d",
+//   };
+
+//   // Generate the token
+//   const token = jwt.sign(payload, secretKey, options);
+
+//   // Return the token as an API response
+//   res.json({
+//     Authorization: `Bearer ${token}`,
+//   });
+// };
 
 module.exports = usersCtlr;
