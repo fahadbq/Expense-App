@@ -82,7 +82,6 @@ usersCtlr.updateProfile = (req, res) => {
         return res.status(404).json({ error: "User not found" });
       }
 
-      console.log("user after update", user);
       res.json(user);
     })
     .catch((err) => {

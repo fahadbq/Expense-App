@@ -86,7 +86,6 @@ expenseCtlr.undoDeleted = (req, res) => {
 
   Expense.restore({ userId, _id: id })
     .then((expense) => {
-      console.log("expense", expense);
       res.json(expense);
     })
     .catch((err) => res.json(err));
