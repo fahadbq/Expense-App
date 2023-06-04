@@ -88,16 +88,12 @@ const Authentication = {
 
   getUser: () => request.get(`/user/account`),
 
-  updateUserProfile: ({ data, id }: any) => {
+  updateUserProfile: ({ data, id }: any) =>
     request.patch(`/user/${id}/profile`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    });
-  },
-
-  getGoogleLogin: () =>
-    axios.get(`${import.meta.env.VITE_GOOGLE_BASE_URL}/auth/google`),
+    }),
 };
 
 const homeAdministration = {

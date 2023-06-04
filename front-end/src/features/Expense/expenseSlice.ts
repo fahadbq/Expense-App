@@ -176,7 +176,6 @@ export const expenseSlice = createSlice({
         state.createExpenseError = "";
       })
       .addCase(createExpense.fulfilled, (state, action) => {
-        console.log("action", action);
         state.createExpenseLoading = false;
         state.createExpenseError = "";
       })

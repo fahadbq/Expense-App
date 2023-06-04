@@ -5,7 +5,6 @@ import { api } from "../../app/services/api";
 export const registerUser = createAsyncThunk(
   "authenticationSlice/registerUser",
   (data: object) => {
-    console.log("data", data);
     return api.Authentication.registerUser(data);
   }
 );
@@ -13,7 +12,6 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "authenticationSlice/loginUser",
   (data: object) => {
-    console.log("data", data);
     return api.Authentication.loginUser(data);
   }
 );
@@ -24,15 +22,8 @@ export const getUser = createAsyncThunk("authenticationSlice/getUser", () => {
 
 export const updateUserProfile = createAsyncThunk(
   "authenticationSlice/updateUserProfile",
-  (data: object) => {
+  async (data: object) => {
     return api.Authentication.updateUserProfile(data);
-  }
-);
-
-export const getGoogleLogin = createAsyncThunk(
-  "authenticationSlice/getGoogleLogin",
-  () => {
-    return api.Authentication.getGoogleLogin();
   }
 );
 
@@ -129,22 +120,11 @@ export const authenticationSlice = createSlice({
         state.updateUserProfileError = "";
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
+        console.log("action", action);
         state.updateUserProfileError = "";
       })
       .addCase(updateUserProfile.rejected, (state, action) => {
         state.updateUserProfileError = "";
-      })
-
-      //Google Login
-      //Update user profile
-      .addCase(getGoogleLogin.pending, (state) => {
-        state.googleLoginError = "";
-      })
-      .addCase(getGoogleLogin.fulfilled, (state, action) => {
-        state.googleLoginError = "";
-      })
-      .addCase(getGoogleLogin.rejected, (state, action) => {
-        state.googleLoginError = "";
       });
   },
 });
