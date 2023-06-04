@@ -47,14 +47,11 @@ const SignUp: React.FC = () => {
   const toggleToast = () => setToastMessage(!toastMessage);
 
   const handleSubmit = async (formData: object, { resetForm }: any) => {
-    console.log("formData", formData);
-
     try {
       const response = await dispatch(registerUser(formData)).unwrap();
       resetForm();
       navigate("/login");
       toggleToast();
-      console.log("response", response);
     } catch (e) {}
   };
 
@@ -71,8 +68,6 @@ const SignUp: React.FC = () => {
       >
         {({ values, errors, touched, isSubmitting, handleSubmit }) => (
           <>
-            {console.log("values", values)}
-            {console.log("errors", errors)}
             <Form className="login-form">
               <h1>Register</h1>
               <InputField
@@ -103,9 +98,7 @@ const SignUp: React.FC = () => {
                   number: "Password has a number.",
                   capital: "Password has a capital letter.",
                 }}
-                onChange={(isValid) => {
-                  console.log("isValid", isValid);
-                }}
+                onChange={(isValid) => {}}
                 iconSize={11}
                 className="password-requirements"
               />

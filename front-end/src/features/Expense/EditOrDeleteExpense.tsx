@@ -75,8 +75,6 @@ const EditOrDeleteExpense = ({ expenseDetails, expensesData }: any) => {
       date: moment(formData?.date, "YYYY-MM-DD"),
     };
 
-    console.log("formData", formData);
-
     try {
       const result = await dispatch(
         updateExpense({ data, id: expenseDetails._id })
@@ -96,8 +94,6 @@ const EditOrDeleteExpense = ({ expenseDetails, expensesData }: any) => {
 
   //Delete Expense
   const handleDelete = async () => {
-    console.log("e", expenseDetails._id);
-
     try {
       const result = await dispatch(
         deleteExpense({ id: expenseDetails._id })

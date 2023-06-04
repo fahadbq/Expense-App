@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { Spin } from "antd";
+import "./App.css";
 
 const AuthenticateGoogleToken = () => {
-  console.log("triggered");
   useEffect(() => {
     const handleSuccessPage = () => {
       // Get the token from the URL query parameters
@@ -10,7 +11,6 @@ const AuthenticateGoogleToken = () => {
 
       if (token) {
         // Process the token as needed
-        console.log(token); // Example: Log the token to the console
 
         // Perform further actions with the token
         // You can save it to local storage, set it as a bearer token in the authorization header, etc.
@@ -33,7 +33,11 @@ const AuthenticateGoogleToken = () => {
     handleSuccessPage();
   }, []);
 
-  return <div>Loading...</div>;
+  return (
+    <div className="loader">
+      <Spin />
+    </div>
+  );
 };
 
 export default AuthenticateGoogleToken;

@@ -19,21 +19,23 @@ const ProfileUpload = () => {
   // const baseURL = import.meta.env.VITE_API_BASE_URL;
   // const imageUrl = userData.profile?.picture?.replace("\\", "/");
 
-  const [imagePreviewUrl, setImagePreviewUrl] =
-    useState<string | ArrayBuffer | null>("");
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<
+    string | ArrayBuffer | null
+  >("https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true");
 
   useEffect(() => {
     const storedImage = localStorage.getItem("imageInLocal");
 
     if (storedImage) {
-      console.log("JSON.parse(storedImage)", storedImage);
       setImagePreviewUrl(storedImage);
+    } else if (userData.profile?.picture) {
+      setImagePreviewUrl(userData.profile?.picture);
     } else {
       setImagePreviewUrl(
         "https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"
       );
     }
-  }, [localStorage.getItem("imageInLocal")]);
+  }, [localStorage.getItem("imageInLocal"), userData]);
 
   const getBase64 = (fileReader: any): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -49,7 +51,6 @@ const ProfileUpload = () => {
     e.preventDefault();
 
     const file = e.target.files[0];
-    console.log("file", file);
     const reader = await getBase64(file);
     setImagePreviewUrl(reader);
     setFieldValue("byteArray", reader);

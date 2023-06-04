@@ -209,7 +209,6 @@ const ExpenseList = ({ expensesData }: ExpenseProps) => {
         <Select
           value={pageSize}
           onChange={(e: any) => {
-            console.log("e", e);
             setPageSize(Number(e));
           }}
           options={[

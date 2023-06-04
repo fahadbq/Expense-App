@@ -49,8 +49,6 @@ const ExpenseContainer = () => {
     dispatch(getBudget());
   }, [dispatch]);
 
-  console.log("filteredData", filteredData);
-
   return (
     <div className="home-container">
       <Charts data={filteredData} categoriesData={categoriesData} />

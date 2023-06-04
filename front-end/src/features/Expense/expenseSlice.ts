@@ -233,7 +233,6 @@ export const expenseSlice = createSlice({
         state.undoDeleteExpenseError = "";
       })
       .addCase(undoDeletedExpense.fulfilled, (state, action) => {
-        console.log("action", action);
         state.undoDeleteExpenseLoading = false;
         state.undoDeleteData = action.payload;
         state.undoDeleteExpenseError = "";

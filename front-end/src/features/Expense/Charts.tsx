@@ -164,7 +164,6 @@ const Charts = ({
   useEffect(() => {
     if (data.length > 0 && budgetData.length > 0) {
       const calculateExpenses = data.reduce((prev: any, curr: any) => {
-        console.log("a", prev);
         return prev + curr.amount;
       }, 0);
 

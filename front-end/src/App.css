@@ -27,6 +27,13 @@
   display: inline-block;
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 @keyframes App-logo-float {
   0% {
     transform: translateY(0);

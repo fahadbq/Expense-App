@@ -159,8 +159,6 @@ const Settings = () => {
             name: string().required("Required*"),
           })}
           onSubmit={async (e, { resetForm }) => {
-            console.log("e", e);
-
             const formData = { ...e, userId: userData._id };
 
             try {

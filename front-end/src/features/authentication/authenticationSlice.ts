@@ -100,7 +100,6 @@ export const authenticationSlice = createSlice({
         state.loginError = "";
       })
       .addCase(loginUser.rejected, (state, action) => {
-        console.log("action", action);
         state.loginError = action.error.message;
       })
 
@@ -111,7 +110,6 @@ export const authenticationSlice = createSlice({
         state.userData = action.payload;
       })
       .addCase(getUser.rejected, (state, action) => {
-        console.log("action", action);
         state.userData = {};
       })
 
@@ -120,7 +118,6 @@ export const authenticationSlice = createSlice({
         state.updateUserProfileError = "";
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
-        console.log("action", action);
         state.updateUserProfileError = "";
       })
       .addCase(updateUserProfile.rejected, (state, action) => {

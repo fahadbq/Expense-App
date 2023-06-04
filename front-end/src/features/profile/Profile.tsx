@@ -1,15 +1,10 @@
 import "./Profile.css";
 
 import { Form, Formik } from "formik";
-// import { DatePickerField } from "../../../stories/DatePickerField";
-// import { DropDownSelect } from "../../../stories/DropDownSelect";
-// import { InputField } from "../../../stories/InputField";
-// import { InputNumberField } from "../../../stories/InputNumberField";
 import { object, string, mixed, number, date } from "yup";
 import { InputField } from "../../stories/InputField";
 import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
 import { Select, Form as AntForm, Button } from "antd";
-import { phoneNumberCodeByCountries } from "../../app/utils/constant";
 
 import {
   getUser,
@@ -35,7 +30,7 @@ const Profile = ({}) => {
     name: userData.profile?.name || "",
     phone: userData.profile?.phone || "",
     occupation: userData.profile?.occupation || "",
-    picture: null,
+    picture: userData.profile?.picture || null,
   };
 
   const handleSubmitProfile = async ({
@@ -54,8 +49,6 @@ const Profile = ({}) => {
       },
       id: userData._id,
     };
-
-    console.log("formData", formData);
 
     try {
       const result = await dispatch(updateUserProfile(formData)).unwrap();

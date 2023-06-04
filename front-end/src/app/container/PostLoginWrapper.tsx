@@ -21,22 +21,6 @@ const PostLoginWrapper: React.FC = () => {
     dispatch(getUser());
   }, [dispatch]);
 
-  // const googleLogout = () => {
-  //   console.log("formData", formData);
-
-  //   toggleToast();
-
-  //   try {
-  //     const response = await dispatch(loginUser(formData)).unwrap();
-  //     resetForm();
-  //     localStorage.setItem("token", response.Authorization);
-  //     navigate("/settings");
-  //   } catch (e) {
-  //     setToastMessage(true);
-  //     console.log("err", e);
-  //   }
-  // };
-
   const items: MenuProps["items"] = [
     {
       key: "1",

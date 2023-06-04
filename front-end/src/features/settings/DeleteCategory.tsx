@@ -22,8 +22,6 @@ const DeleteCategory = ({ item }: DeleteCategoryProps) => {
   );
 
   const onDeleteCategory = async (obj: any) => {
-    console.log("obj11", obj);
-
     try {
       const result = await dispatch(deleteCategory(obj._id)).unwrap();
 
