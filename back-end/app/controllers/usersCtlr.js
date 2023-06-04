@@ -74,7 +74,7 @@ usersCtlr.account = (req, res) => {
 
 usersCtlr.updateProfile = (req, res) => {
   const userId = req.user._id;
-  const body = { ...req.body, picture: req?.file?.path };
+  const body = { ...req.body, pictureFile: req?.file?.path };
 
   User.findOneAndUpdate({ _id: userId }, { profile: body }, { new: true })
     .then((user) => {
@@ -82,6 +82,7 @@ usersCtlr.updateProfile = (req, res) => {
         return res.status(404).json({ error: "User not found" });
       }
 
+      console.log("user after update", user);
       res.json(user);
     })
     .catch((err) => {
@@ -118,7 +119,7 @@ usersCtlr.googleAuthentication = async (req, res) => {
 
     // Create the payload for the token
     const payload = {
-      userId: existingUser._id,
+      _id: existingUser._id,
       username: existingUser.profile.name,
       email: existingUser.email,
       profile: existingUser.profile,
@@ -131,50 +132,16 @@ usersCtlr.googleAuthentication = async (req, res) => {
     };
 
     // Generate the token
-    const token = jwt.sign(payload, secretKey, options);
+    const token = `Bearer ${jwt.sign(payload, secretKey, options)}`;
 
     // Return the token as an API response
 
-    res.redirect(`${process.env.CLIENT_URL}?token=${token}`);
+    res.redirect(`${process.env.CLIENT_URL}/auth/success?id=${token}`);
   } catch (error) {
     // Handle any errors that occur during the process
     console.error("Error during Google authentication:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
-// usersCtlr.googleAuthentication = (req, res) => {
-//   // Access the authenticated user's information
-//   const user = req.user;
-
-//   // Assuming you have a secret key for signing the token
-//   const secretKey = "expense-app";
-
-//   console.log("user after login", user);
-
-//   // Create the payload for the token
-//   const payload = {
-//     userId: user.id,
-//     username: user.displayName,
-//     email: user.email?.[0].value,
-//     profile: {
-//       name: user.displayName,
-//       picture: user.photos?.[0].value,
-//     },
-//   };
-
-//   // Set the options for the token (e.g., expiration time)
-//   const options = {
-//     expiresIn: "2d",
-//   };
-
-//   // Generate the token
-//   const token = jwt.sign(payload, secretKey, options);
-
-//   // Return the token as an API response
-//   res.json({
-//     Authorization: `Bearer ${token}`,
-//   });
-// };
 
 module.exports = usersCtlr;

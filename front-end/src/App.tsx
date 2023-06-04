@@ -10,6 +10,7 @@ import Settings from "./features/settings/Settings";
 import Profile from "./features/profile/Profile";
 import PrivateRoute from "./features/authentication/PrivateRoute";
 import ExpenseContainer from "./features/Expense/ExpenseContainer";
+import AuthenticateGoogleToken from "./AuthenticateGoogleToken";
 
 function App() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Container />} />
+        {/* Google Login */}
+        <Route path="/auth/success" element={<AuthenticateGoogleToken />} />
         <Route element={<PreLoginWrapper />}>
           <Route path="/register" element={<SignUp />} />
           <Route path="/login" element={<Login />} />

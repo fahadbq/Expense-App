@@ -8,7 +8,6 @@ const checkCategory = require("../app/middleware/checkCategory");
 const encryptedPassword = require("../app/middleware/encryptPassword");
 const router = express.Router();
 const passport = require("passport");
-const isLoggedIn = require("../app/middleware/isLoggedIn");
 
 const multer = require("multer");
 
