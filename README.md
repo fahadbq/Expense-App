@@ -48,6 +48,9 @@
 <ul>
     <li>Typescript</li>
     <li>React Js</li>
+    <li>Node Js</li>
+    <li>Express Js</li>
+    <li>MongoDB</li>
     <li>Redux Tool kit</li>
     <li>Redux Thunk</li>
     <li>Ant Design</li>
